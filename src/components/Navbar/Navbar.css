@@ -1,0 +1,19 @@
+.gulams-heading {
+    font-family: 'Gulams Condensed', sans-serif !important;
+    font-weight: 800 !important;
+    font-style: normal;
+}
+
+.badge-container {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1030;
+}
+
+@media (min-width: 992px) { /* lg breakpoint */
+  .badge-container {
+    position: static; /* normal flow on desktop */
+    margin-left: 1rem; /* optional spacing from nav items */
+  }
+}
