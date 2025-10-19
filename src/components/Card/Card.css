@@ -1,0 +1,81 @@
+/* Import free font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&display=swap');
+
+/* ===== CARD BASE ===== */
+.bet-card {
+  width: 18rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: #f9f9f9;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.bet-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(178, 106, 240, 0.4);
+}
+
+.card-title {
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #e9d5ff;
+  text-shadow: 0 0 6px rgba(178, 106, 240, 0.5);
+}
+
+/* ===== STATUS COLORS ===== */
+.status-pending {
+  color: #facc15;
+}
+
+.status-accepted {
+  color: #34d399;
+}
+
+.status-other {
+  color: #a855f7;
+}
+
+/* ===== BUTTON STYLES ===== */
+.glow-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  color: white;
+  transition: all 0.25s ease;
+}
+
+.glow-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Accept – mint green */
+.btn-accept {
+  background-color: #34d399;
+}
+.btn-accept:hover {
+  background-color: #059669;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
+}
+
+/* Settle – warm red */
+.btn-settle {
+  background-color: #f87171;
+}
+.btn-settle:hover {
+  background-color: #dc2626;
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.6);
+}
+
+/* View – electric blue */
+.btn-view {
+  background-color: #60a5fa;
+}
+.btn-view:hover {
+  background-color: #2563eb;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}

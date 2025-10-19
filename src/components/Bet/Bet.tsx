@@ -33,59 +33,42 @@ function BetPopUp() {
       const data: { status: string; bet: Bet } = await response.json();
       console.log("Bet created successfully:", data);
 
-      // Reset form fields
+      // Reset fields
       setBetAmount(undefined);
       setDescription("");
       setSender("");
       setRecipient("");
-      setShowForm(false); // hide form after saving
+      setShowForm(false);
     } catch (error) {
       console.error("Failed to create bet:", error);
     }
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="bet-popup">
       <button
         id="myBtn"
         type="button"
-        className="btn btn-primary btn-lg"
+        className="btn btn-primary btn-lg neon-button"
         onClick={() => setShowForm((prev) => !prev)}
-        style={{ position: "fixed", bottom: "2rem", right: "2rem" }}
       >
         Place Bet
       </button>
 
       {showForm && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "6rem",
-            right: "2rem",
-            width: "320px",
-            background: "white",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "1rem",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-            zIndex: 1000,
-          }}
-        >
-          <h5>Place Bet</h5>
+        <div className="bet-popup-form animate-pop">
+          <h5 className="popup-title">Place a Bet ✦</h5>
           <BetForm
             onAmountChange={setBetAmount}
             onDescriptionChange={setDescription}
             onSenderChange={setSender}
             onRecipientChange={setRecipient}
           />
-          <div style={{ marginTop: "1rem", display: "flex", justifyContent: "space-between" }}>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setShowForm(false)}
-            >
+          <div className="popup-actions">
+            <button className="btn btn-secondary glow-btn" onClick={() => setShowForm(false)}>
               Close
             </button>
-            <button className="btn btn-primary" onClick={handleSave}>
+            <button className="btn btn-primary glow-btn" onClick={handleSave}>
               Save
             </button>
           </div>

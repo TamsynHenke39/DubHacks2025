@@ -26,7 +26,7 @@ function App() {
 
         // Filter for bets involving USERNAME
         const filtered: Bet[] = data.bets.filter(
-          (b: Bet) => b.sender === USERNAME || b.reciever === USERNAME
+          (b: Bet) => b.sender === USERNAME || b.receiver === USERNAME
         );
 
         setBetMap(filtered);

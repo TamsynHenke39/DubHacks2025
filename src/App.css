@@ -1,40 +1,103 @@
 @font-face {
-    font-family: 'Gulams Condensed';
-    src: url('/fonts/GulamsCondensedDemoExtrabold-8OBrD.otf') format('otf');
-    font-weight: 800;
-    font-style: normal;
+  font-family: "Gulams Condensed";
+  src: url("/fonts/GulamsCondensedDemoExtrabold-8OBrD.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+:root {
+  --bs-primary: #b26af0 !important;
+  --purple-gradient: linear-gradient(135deg, #b26af0 0%, #8b5cf6 50%, #ec4899 100%);
+  --glass-bg: rgba(255, 255, 255, 0.15);
 }
 
 h1, h2 {
-    font-family: 'Gulams Condensed', sans-serif !important;
-    font-weight: 800 !important;
-    font-style: normal;
-
-    padding: 40px;
+  font-family: 'Gulams Condensed', sans-serif !important;
 }
 
-.bet-popup {
-    position: absolute;
-    bottom: 0;
-    right: 0; 
-    padding: 2rem;
-
+body {
+  background: radial-gradient(circle at top left, #2a044a, #120024, #0d001f);
+  color: #fff;
+  font-family: "Inter", sans-serif;
 }
 
-/* Override Bootstrap primary color */
-:root {
-  --bs-primary: #7b5cf5; /* Tailwind purple-500, you can pick any hex you like */
+/* Floating button */
+.neon-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--purple-gradient);
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.8rem;
+  box-shadow: 0 0 15px rgba(178, 106, 240, 0.6);
+  font-family: "Gulams Condensed", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: white;
+  transition: all 0.25s ease;
 }
 
-/* Optional: make hover slightly darker */
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: #6d4ce8; /* darker purple for hover */
-  border-color: #6d4ce8;
+.neon-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.8);
 }
 
-/* Optional: Active button state */
-.btn-primary:active {
-  background-color: #5c3bd1;
-  border-color: #5c3bd1;
+/* Popup container */
+.bet-popup-form {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 320px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  color: #f9f9f9;
+}
+
+/* Header */
+.popup-title {
+  font-family: "Gulams Condensed", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(180, 106, 240, 0.6);
+}
+
+/* Buttons in form */
+.popup-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.glow-btn {
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  transition: all 0.25s ease;
+}
+
+.glow-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(178, 106, 240, 0.8);
+}
+
+/* Subtle animation for appearance */
+@keyframes pop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop {
+  animation: pop 0.25s ease-out forwards;
 }
