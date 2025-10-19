@@ -20,3 +20,21 @@ h1, h2 {
     padding: 2rem;
 
 }
+
+/* Override Bootstrap primary color */
+:root {
+  --bs-primary: #7b5cf5; /* Tailwind purple-500, you can pick any hex you like */
+}
+
+/* Optional: make hover slightly darker */
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #6d4ce8; /* darker purple for hover */
+  border-color: #6d4ce8;
+}
+
+/* Optional: Active button state */
+.btn-primary:active {
+  background-color: #5c3bd1;
+  border-color: #5c3bd1;
+}

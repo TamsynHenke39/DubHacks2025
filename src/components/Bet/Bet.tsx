@@ -1,5 +1,7 @@
+import * as bootstrap from "bootstrap";
 import { useState } from "react";
 import BetForm from "./BetForm/BetForm";
+import type { Bet } from "../../Bet";
 
 function BetPopUp() {
   const [betAmount, setBetAmount] = useState<number>();
@@ -7,7 +9,16 @@ function BetPopUp() {
   const [sender, setSender] = useState<string>();
   const [recipient, setRecipient] = useState<string>();
 
+  const[toggleAnimation, setAnimation] = useState<boolean>(false);
+
+
   const handleSave = async () => {
+
+    if (!betAmount || !description || !sender || !recipient) {
+      alert("Please fill out all fields");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:5000/api/bets/create", {
         method: "POST",
@@ -26,20 +37,51 @@ function BetPopUp() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
+      const data:  { status: string; bet: Bet } = await response.json();
       console.log("Bet created successfully:", data);
+
+      
+      const modal = document.getElementById('exampleModal');
+
+      if (modal) {
+        const bsModal = bootstrap.Modal.getInstance(modal);
+        bsModal?.hide();
+      }
+
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
+
+      // Remove the modal-open class from body
+      document.body.classList.remove('modal-open');
+
+      setBetAmount(undefined);
+      setDescription("");
+      setSender("");
+      setRecipient("");
+
     } catch (error) {
       console.error("Failed to create bet:", error);
     }
   };
 
+  const handleBetClick = () => {
+    setAnimation(false);
+    void document.getElementById("myBtn")?.offsetWidth; // force reflow
+    setAnimation(true);  // trigger animation
+
+  } 
+
   return (
     <>
       <button
         type="button"
-        className="btn btn-primary btn-lg animate__animated animate__pulse"
+        className={`btn btn-primary btn-lg animate__animated ${toggleAnimation ? "animate__pulse" : ""}`}
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
+        onClick = {handleBetClick}
+
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +105,7 @@ function BetPopUp() {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1 className="modal-title fs-5" id="exampleModalLabel" style ={{padding: '1rem'}}>
                 Place Bet
               </h1>
               <button
