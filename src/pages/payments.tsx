@@ -1,11 +1,10 @@
+import React from "react";
 import WalletDemo from "../components/WalletDemo";
 
-function Payment () {
+export default function PaymentsPage() {
   return (
     <div>
       <WalletDemo />
     </div>
   );
 }
-
-export default Payment;
