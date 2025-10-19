@@ -1,8 +1,13 @@
 import Navbar from './components/Navbar/Navbar.tsx'
+import 'animate.css';
 import './App.css'
 import BetPopUp from './components/Bet/Bet.tsx'
 function App() {
   // const [count, setCount] = useState(0)
+
+
+  //a
+  const USERNAME = "alice@email.com";
 
 
   return (
