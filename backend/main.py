@@ -3,6 +3,7 @@ from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 
 bets = [] # Empty bets list
 
@@ -20,7 +21,7 @@ def create_bet():
     
     bet = {
         'id': len(bets) + 1,
-        'sender': data.get('sender'),
+        'sender': data.get('sender'),   
         'receiver': data.get('receiver'),
         'amount': data.get('amount'),
         'description': data.get('description'),
@@ -55,9 +56,61 @@ def accept_bet(bet_id):
 
     return jsonify({'status': 'success', 'bet': bet}), 200
 
-# @app.route('/users')
-# def users():
-#     return {'users': ['user1', 'user2']}
+@app.route('/api/bets/<int:bet_id>/settle', methods=['POST'])
+def settle_bet(bet_id):
+    # Find the bet
+    bet = next((b for b in bets if b.get('id') == bet_id), None)
+    
+    if not bet:
+        return jsonify({'error': 'Bet not found'}), 404
+    
+    # Check if bet is in correct status
+    if bet.get('status') != 'accepted':
+        return jsonify({'error': 'Bet must be accepted before settling'}), 400
+    
+    if bet.get('status') == 'settled':
+        return jsonify({'error': 'Bet already settled'}), 400
+    
+    # Get winner from request
+    data = request.get_json()
+    winner = data.get('winner')  # Should be 'sender' or 'receiver'
+    
+    # Validate winner
+    if winner not in ['sender', 'receiver']:
+        return jsonify({'error': 'Winner must be "sender" or "receiver"'}), 400
+    
+    # Update bet status
+    bet['status'] = 'settled'
+    bet['winner'] = winner
+    bet['settled_at'] = datetime.utcnow().isoformat()
+    
+    # Determine who won and who lost
+    if winner == 'sender':
+        winner_email = bet['sender']
+        loser_email = bet['receiver']
+    else:
+        winner_email = bet['receiver']
+        loser_email = bet['sender']
+    
+    # TODO: VISA Payment Integration Goes Here
+    # This is where you'll:
+    # 1. Charge the loser's account (bet['amount'])
+    # 2. Transfer money to winner's account
+    # 3. Store transaction IDs
+    
+    bet['payment'] = {
+        'status': 'completed',
+        'winner': winner_email,
+        'loser': loser_email,
+        'amount': bet['amount'],
+        'transaction_id': None  # Will be filled when VISA API is integrated
+    }
+    
+    return jsonify({
+        'status': 'success',
+        'bet': bet,
+        'message': f'Bet settled. ${bet["amount"]} transferred to {winner_email}'
+    }), 200
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
