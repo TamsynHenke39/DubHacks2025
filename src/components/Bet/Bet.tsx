@@ -2,7 +2,11 @@ import { useState } from "react";
 import BetForm from "./BetForm/BetForm";
 import type { Bet } from "../../Bet";
 
-function BetPopUp() {
+interface BetPopUpProps {
+  onNewBet?: (bet: Bet) => void; // optional callback
+}
+
+function BetPopUp({ onNewBet }: BetPopUpProps) {
   const [betAmount, setBetAmount] = useState<number>();
   const [description, setDescription] = useState<string>("");
   const [sender, setSender] = useState<string>("");
@@ -31,9 +35,12 @@ function BetPopUp() {
         throw new Error(`HTTP error! Status: ${response.status}`);
 
       const data: { status: string; bet: Bet } = await response.json();
-      console.log("Bet created successfully:", data);
+      console.log("✅ Bet created successfully:", data.bet);
 
-      // Reset fields
+      // ✅ Immediately inform the parent to add it to the list
+      if (onNewBet) onNewBet(data.bet);
+
+      // Reset form
       setBetAmount(undefined);
       setDescription("");
       setSender("");
