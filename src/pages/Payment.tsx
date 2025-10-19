@@ -1,5 +1,3 @@
-import WalletDemo from "../components/WalletDemo";
-
 function Payment () {
   return (
     <div>

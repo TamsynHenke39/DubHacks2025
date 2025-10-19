@@ -1,6 +1,14 @@
+
 export type Bet = {
+    id: number,
     sender: string,
-    recipient: string,
+    receiver: string,
     amount: number,
-    description: number,
+    description: string,
+    status: 'pending' | 'accepted' | 'settled';
+
+    payment? : {
+        status: "winner" | "loser";
+        transaction_id?: string | null;
+    }
 }
