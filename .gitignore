@@ -36,3 +36,8 @@ ENV/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Environment files (do not commit secrets)
+.env
+.env.local
+payments/.env
