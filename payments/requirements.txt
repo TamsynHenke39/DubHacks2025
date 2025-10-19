@@ -1,0 +1,10 @@
+# Payments service dependencies (isolated)
+fastapi>=0.110
+uvicorn[standard]>=0.22
+SQLAlchemy>=2.0
+python-dotenv>=1.0
+httpx>=0.24
+cybersource-rest-client-python>=0.0.57
+pydantic>=2.5
+typing-extensions>=4.8
+stripe>=11.0.0

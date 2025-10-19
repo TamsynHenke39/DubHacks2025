@@ -25,6 +25,7 @@ dist-ssr
 
 # Python
 venv/
+.venv/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -36,3 +37,8 @@ ENV/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Environment files (do not commit secrets)
+.env
+.env.local
+payments/.env
